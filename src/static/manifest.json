@@ -4,14 +4,14 @@
   "version": "1.0.0",
   "manifest_version": 3,
   "icons": {
-    "16": "float.png",
-    "48": "float.png",
-    "128": "float.png"
+    "16": "malibu.png",
+    "48": "malibu.png",
+    "128": "malibu.png"
   },
   "action": {
     "default_popup": "popup.html",
     "default_title": "Malibu",
-    "default_icon": "float.png"
+    "default_icon": "malibu.png"
   },
   "permissions": ["storage"],
   "options_page": "options.html",
@@ -26,7 +26,7 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["float.png"],
+      "resources": ["malibu.png"],
       "matches": ["*://popsci.com/*"]
     }
   ]
