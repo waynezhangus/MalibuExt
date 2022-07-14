@@ -4,6 +4,9 @@ const HtmlPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
+  watchOptions: {
+    ignored: ['**/dist', '**/node_modules'],
+  },
   entry: {
     popup: path.resolve('src/popup/index.tsx'),
     options: path.resolve('src/options/index.tsx'),
@@ -19,20 +22,20 @@ module.exports = {
       },
       {
         test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
+        use: ['style-loader', 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.(jpg|jpeg|png|woff|woff2|eot|ttf|svg)$/,
         // use: {
         //   loader: 'url-loader'
         // },
-        type: 'asset/resource'
+        type: 'asset/resource',
       },
       {
         test: /\.md$/,
-        use: 'raw-loader'
-      }
-    ]
+        use: 'raw-loader',
+      },
+    ],
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -46,13 +49,10 @@ module.exports = {
         {
           from: path.resolve('src/static'),
           to: path.resolve('dist'),
-        }
-      ]
+        },
+      ],
     }),
-    ...generateHtmlPlugins([
-      'popup',
-      'options'
-    ]),
+    ...generateHtmlPlugins(['popup', 'options']),
   ],
   output: {
     filename: '[name].js',
@@ -61,16 +61,19 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks(chunk) {
-        return chunk.name !== 'content' && chunk.name !== 'background'
-      }
+        return chunk.name !== 'content' && chunk.name !== 'background';
+      },
     },
-  }
-}
+  },
+};
 
 function generateHtmlPlugins(chunks) {
-  return chunks.map(chunk => new HtmlPlugin({
-    title: 'CoSight',
-    filename: `${chunk}.html`,
-    chunks: [chunk],
-  }))
+  return chunks.map(
+    (chunk) =>
+      new HtmlPlugin({
+        title: 'Malibu',
+        filename: `${chunk}.html`,
+        chunks: [chunk],
+      })
+  );
 }
