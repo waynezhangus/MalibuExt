@@ -1,0 +1,33 @@
+{
+  "name": "Malibu",
+  "description": "Chrome extension for Tweeted Articles",
+  "version": "1.0.0",
+  "manifest_version": 3,
+  "icons": {
+    "16": "float.png",
+    "48": "float.png",
+    "128": "float.png"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Malibu",
+    "default_icon": "float.png"
+  },
+  "permissions": ["storage"],
+  "options_page": "options.html",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://popsci.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["float.png"],
+      "matches": ["*://popsci.com/*"]
+    }
+  ]
+}
